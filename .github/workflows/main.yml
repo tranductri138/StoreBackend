@@ -24,11 +24,6 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        env:
-          MONGO_URI=mongodb://localhost:27017/tris_store
-          PORT=5000
-          NODE_ENV=development
-          JWT_SECRET=trisdepzai
         run: npm install
 
       - name: Build
@@ -36,3 +31,20 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+    env:
+      MONGO_URI: mongodb://localhost:27017/tris_store
+      PORT: 5000
+      NODE_ENV: development
+      JWT_SECRET: trisdepzai
+
+  print-env:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print environment variables
+        run: |
+          echo "MONGO_URI: ${{ env.MONGO_URI }}"
+          echo "PORT: ${{ env.PORT }}"
+          echo "NODE_ENV: ${{ env.NODE_ENV }}"
+          echo "JWT_SECRET: ${{ env.JWT_SECRET }}"
