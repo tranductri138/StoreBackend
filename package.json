@@ -5,7 +5,7 @@
   "type": "module",
   "author": "Tris dep zai",
   "scripts": {
-    "dev" : "nodemon --inspect index.js",
+    "dev" : "nodemon index.js --debug",
     "start": "node index.js"
   },
   "devDependencies": {
