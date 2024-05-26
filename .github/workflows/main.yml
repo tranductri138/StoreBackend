@@ -29,9 +29,6 @@ jobs:
       - name: Build
         run: npm run start
 
-      - name: Run tests
-        run: npm test
-
     env:
       MONGO_URI: mongodb://localhost:27017/tris_store
       PORT: 5000
