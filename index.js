@@ -35,7 +35,7 @@ app.get("/api/config/paypal", (req, res) => {
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
 
-connectDB();
+// connectDB();
 setTimeout(async ()=>{
   app.listen(port, () => console.log(`Server running on port: ${port}`));
 })
