@@ -23,17 +23,6 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run start
-
-    env:
-      MONGO_URI: mongodb://localhost:27017/tris_store
-      PORT: 5000
-      NODE_ENV: development
-      JWT_SECRET: trisdepzai
 
   print-env:
     needs: build
