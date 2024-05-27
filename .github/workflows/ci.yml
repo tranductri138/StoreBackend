@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Login DockerHub
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
