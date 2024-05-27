@@ -19,9 +19,9 @@ jobs:
           run: docker login  -u $DOCKER_USER_REPO -p $DOCKER_ACCESS_TOKEN
 
       - name: Build docker image
-        run: docker build -t tridezpai/cicd-store-backend .
+        run: docker build -t cicd-store-backend .
 
       - name: Push to DockerHub
-        run: docker push tridezpai/cicd-store-backend:latest
+        run: docker push cicd-store-backend:latest
 
 
