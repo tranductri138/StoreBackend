@@ -12,11 +12,16 @@ jobs:
 
     steps:
       - name: Login DockerHub
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         env:
-          DOCKER_USERNAME: ${{secrets.DOCKER_USER_REPO}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_ACCESS_TOKEN}}
-          run: docker login  -u $DOCKER_USER_REPO -p $DOCKER_ACCESS_TOKEN
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: docker login  -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Verify Docker client
+        run: |
+          echo "Docker client information:"
+          docker info
 
       - name: Build docker image
         run: docker build -t cicd-store-backend .
