@@ -22,11 +22,12 @@ jobs:
 
       - name: Build docker image
         run: |
-          
-          docker build -t cicd-storebackend .
+          COMMIT_ID=$(git rev-parse --short HEAD)
+          IMAGE_NAME=ghcr.io/${{ secrets.GH_USERNAME }}/${COMMIT_ID}
+          docker build -t $IMAGE_NAME .
 
       - name: Push to GitHub Container Registry
         run: |
           COMMIT_ID=$(git rev-parse --short HEAD)
-          IMAGE_NAME=ghcr.io/${{ secrets.GH_USERNAME }}/cicd-storebackend:${COMMIT_ID}
+          IMAGE_NAME=ghcr.io/${{ secrets.GH_USERNAME }}/${COMMIT_ID}
           docker push $IMAGE_NAME
