@@ -6,7 +6,7 @@
   "author": "Tris dep zai",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "serve": "node index.js"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
