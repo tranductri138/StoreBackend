@@ -10,6 +10,9 @@ RUN npm install
 
 COPY . /app
 
+ARG REPO
+LABEL org.opencontainers.image.source=$REPO
+
 EXPOSE 5000
 
 CMD ["npm" , "run" , "serve" ]
