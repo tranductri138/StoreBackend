@@ -12,16 +12,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Login DockerHub
-        env:
-          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        run: docker login  -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.GH_TOKEN }}
 
       - name: Build docker image
-        run: docker build -t tridezpai/cicd-store-backend .
+        run: |
+          COMMIT_ID=$(git rev-parse --short HEAD)
+          IMAGE_NAME=ghcr.io/${{ github.repository }}/cicd-store-backend:${COMMIT_ID}
+          docker build -t $IMAGE_NAME .
 
-      - name: Push to DockerHub
-        run: docker push tridezpai/cicd-store-backend:latest
-
-
+      - name: Push to GitHub Container Registry
+        run: |
+          COMMIT_ID=$(git rev-parse --short HEAD)
+          IMAGE_NAME=ghcr.io/${{ github.repository }}/cicd-store-backend:${COMMIT_ID}
+          docker push $IMAGE_NAME
