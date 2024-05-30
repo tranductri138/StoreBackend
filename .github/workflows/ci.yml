@@ -23,11 +23,11 @@ jobs:
       - name: Build docker image
         run: |
           COMMIT_ID=$(git rev-parse --short HEAD)
-          IMAGE_NAME=ghcr.io/${{ secrets.GH_USERNAME }}/${{ github.repository }}/${COMMIT_ID}
+          IMAGE_NAME=ghcr.io/${{ secrets.GH_USERNAME }}/store-backend/${COMMIT_ID}
           docker build -t $IMAGE_NAME .
 
       - name: Push to GitHub Container Registry
         run: |
           COMMIT_ID=$(git rev-parse --short HEAD)
-          IMAGE_NAME=ghcr.io/${{ secrets.GH_USERNAME }}/${{ github.repository }}/${COMMIT_ID}
+          IMAGE_NAME=ghcr.io/${{ secrets.GH_USERNAME }}/store-backend/${COMMIT_ID}
           docker push $IMAGE_NAME
