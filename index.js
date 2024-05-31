@@ -14,7 +14,6 @@ import uploadRoutes from "./src/routes/uploadRoutes.js";
 import orderRoutes from "./src/routes/orderRoutes.js";
 
 import { isExistFile } from "./src/service/File.js"
-import fs from "fs";
 
 dotenv.config();
 const port = process.env.PORT || 5000;
@@ -36,17 +35,17 @@ app.use("/api/upload", uploadRoutes);
 app.use("/api/orders", orderRoutes);
 
 app.get("/api/config/paypal", (req, res) => {
-  res.send({ clientId: process.env.PAYPAL_CLIENT_ID });
+    res.send({ clientId: process.env.PAYPAL_CLIENT_ID });
 });
 
-app.get("/hello" , (req , res) => {
-  return res.send({ message :"Hi im store-backend"})
+app.get("/hello", (req, res) => {
+    return res.send({ message: "Hi im store-backend" })
 })
 
 app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
 
-setTimeout(async ()=>{
-  isExistFile(`${__dirname}/uploads`)
-  // await connectDB();
-  app.listen(port, () => console.log(`Server running on port: ${port}`));
+setTimeout(async () => {
+    isExistFile(`${ __dirname }/uploads`)
+    await connectDB()
+    app.listen(port, () => console.log(`Server running on port: ${ port }`));
 })
