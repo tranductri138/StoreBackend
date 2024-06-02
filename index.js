@@ -15,7 +15,8 @@ import orderRoutes from "./src/routes/orderRoutes.js";
 
 import { isExistFile } from "./src/service/File.js"
 
-dotenv.config();
+dotenv.config({ path: process.env.NODE_ENV === 'prod' ? 'prod.env' : '.env' });
+
 const port = process.env.PORT || 5000;
 
 

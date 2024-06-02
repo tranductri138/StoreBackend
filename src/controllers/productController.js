@@ -1,5 +1,5 @@
 import asyncHandler from "../middlewares/asyncHandler.js";
-import { Product } from "storeschema";
+import { Product } from "storeschema1";
 
 const addProduct = asyncHandler(async (req, res) => {
     console.log(req.fields)
