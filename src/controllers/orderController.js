@@ -1,5 +1,5 @@
-import { Order } from "storeschema";
-import { Product } from "storeschema";
+import { Order } from "storeschema1";
+import { Product } from "storeschema1";
 
 // Utility Function
 function calcPrices(orderItems) {

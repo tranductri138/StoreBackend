@@ -1,4 +1,4 @@
-import { Category } from "storeschema";
+import { Category } from "storeschema1";
 import asyncHandler from "../middlewares/asyncHandler.js";
 
 const createCategory = asyncHandler(async (req, res) => {
