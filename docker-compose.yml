@@ -1,61 +1,64 @@
 version: "3.1"
 
 services:
-  app:
-    container_name: app-be
-    image: store-backend
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: on-failure
-    env_file:
-      - prod.env
-    ports:
-      - '5000:5000'
-    depends_on:
-      - mongodb1
-      - mongodb2
-      - mongodb3
-    networks:
-      - tris-web
+  #  app:
+  #    container_name: app-be
+  #    image: store-backend
+  #    build:
+  #      context: .
+  #      dockerfile: Dockerfile
+  #    restart: on-failure
+  #    env_file:
+  #      - prod.env
+  #    ports:
+  #      - '5000:5000'
+  #    depends_on:
+  #      - mongodb1
+  #      - mongodb2
+  #      - mongodb3
+  #    networks:
+  #      - tris-web
 
   mongodb1:
     image: mongo:7.0.8
     container_name: mongo1
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ,"--port", "27018" ]
+    extra_hosts:
+      - "mongo1:host-gateway"
     links:
       - mongodb3
       - mongodb2
     restart: always
     ports:
-      - "30001:27017"
+      - "27018:27018"
     volumes:
       - app-db-data-mongodb1:/data/db
-      - ./rs-init.sh:/scripts/rs-init.sh
     networks:
       - tris-web
 
   mongodb2:
     image: mongo:7.0.8
     container_name: mongo2
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" , "--port", "27019" ]
+    extra_hosts:
+      - "mongo1:host-gateway"
     restart: always
-    expose:
-      - 27017
     ports:
-      - "30002:27017"
+      - "27019:27019"
     volumes:
       - app-db-data-mongodb2:/data/db
     networks:
-    - tris-web
+      - tris-web
 
   mongodb3:
     image: mongo:7.0.8
     container_name: mongo3
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs","--port" , "27010" ]
+    extra_hosts:
+      - "mongo1:host-gateway"
     restart: always
     ports:
-      - "30003:27017"
+      - "27010:27010"
     volumes:
       - app-db-data-mongodb3:/data/db
     networks:
