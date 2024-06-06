@@ -1,23 +1,23 @@
 version: "3.1"
 
 services:
-  #  app:
-  #    container_name: app-be
-  #    image: store-backend
-  #    build:
-  #      context: .
-  #      dockerfile: Dockerfile
-  #    restart: on-failure
-  #    env_file:
-  #      - prod.env
-  #    ports:
-  #      - '5000:5000'
-  #    depends_on:
-  #      - mongodb1
-  #      - mongodb2
-  #      - mongodb3
-  #    networks:
-  #      - tris-web
+  app:
+    container_name: app-be
+    image: store-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    env_file:
+      - prod.env
+    ports:
+      - '5000:5000'
+    depends_on:
+      - mongodb1
+      - mongodb2
+      - mongodb3
+    networks:
+      - tris-web
 
   mongodb1:
     image: mongo:7.0.8
