@@ -1,9 +1,0 @@
-name: CI For Dev
-
-on:
-  push:
-    branches:
-      - release
-jobs:
-  build:
-    runs-on: ubuntu-latest
